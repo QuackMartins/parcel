@@ -1,5 +1,4 @@
 const Watcher = require('../index');
-const {sleep} = require('@parcel/test-utils');
 const assert = require('assert');
 
 describe('Watcher', function() {
@@ -9,7 +8,7 @@ describe('Watcher', function() {
     assert(!!watcher.child);
     assert(!watcher.ready);
 
-    await sleep(1000);
+    await new Promise(resolve => watcher.once('ready', resolve));
 
     assert(!!watcher.child);
     assert(watcher.ready);
@@ -20,7 +19,7 @@ describe('Watcher', function() {
   it('Should be able to properly destroy the watcher', async () => {
     let watcher = new Watcher();
 
-    await sleep(1000);
+    await new Promise(resolve => watcher.once('ready', resolve));
 
     assert(!!watcher.child);
     assert(watcher.ready);
