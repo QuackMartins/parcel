@@ -3,7 +3,7 @@
 import {Resolver} from '@parcel/plugin';
 import type {CLIOptions, Dependency, PackageJSON} from '@parcel/types';
 import path from 'path';
-import fs from '@parcel/fs';
+import * as fs from '@parcel/fs';
 import {glob} from '@parcel/utils';
 import micromatch from 'micromatch';
 import builtins from './builtins';
@@ -27,11 +27,11 @@ type InternalPackageJSON = PackageJSON & {
 
 const EMPTY_SHIM = require.resolve('./_empty');
 
-type Options = {
+type Options = {|
   cli: CLIOptions,
   rootDir: string,
   extensions: Array<string>
-};
+|};
 
 /**
  * This resolver implements a modified version of the node_modules resolution algorithm:
